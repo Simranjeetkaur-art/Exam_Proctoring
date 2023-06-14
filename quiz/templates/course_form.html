@@ -1,0 +1,53 @@
+{% if courses %}
+  {% for course in courses %}
+    {% if course_detail %}
+      <div class="course">
+        <h2>{{ course.course_name }}</h2>
+        <p>{{ course.course_description }}</p>
+        <p>Category: {{ course.course_category }}</p>
+        <!-- Add more details as needed -->
+        <a href="{% url 'course_update' course.id %}">Update</a>
+        <form method="post" action="{% url 'course_delete' course.id %}">
+          {% csrf_token %}
+          <input type="submit" value="Delete">
+        </form>
+      </div>
+    {% else %}
+      <div class="course">
+        <h2>{{ course.course_name }}</h2>
+        <p>{{ course.course_description }}</p>
+        <a href="{% url 'course_detail' course.id %}">View Details</a>
+      </div>
+    {% endif %}
+  {% empty %}
+    <p>No courses available.</p>
+  {% endfor %}
+{% endif %}
+
+{% if course_form %}
+  {% if creating %}
+    <h2>Create Course</h2>
+  {% else %}
+    <h2>Update Course</h2>
+  {% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+  </form>
+{% endif %}
+
+{% if course_confirm_delete %}
+  <h2>Confirm Delete</h2>
+  <div class="course">
+    <h3>{{ course.course_name }}</h3>
+    <p>{{ course.course_description }}</p>
+    <p>Category: {{ course.course_category }}</p>
+    <!-- Add more details as needed -->
+  </div>
+  <form method="post" action="{% url 'course_delete' course.id %}">
+    {% csrf_token %}
+    <p>Are you sure you want to delete this course?</p>
+    <input type="submit" value="Delete">
+  </form>
+{% endif %}

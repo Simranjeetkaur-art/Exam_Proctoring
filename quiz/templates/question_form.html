@@ -1,0 +1,35 @@
+<!-- quiz/templates/question_form.html -->
+
+{% if questions %}
+  <h2>Questions:</h2>
+  <ul>
+    {% for question in questions %}
+      <li><a href="{% url 'question_detail' question_id=question.id %}">{{ question.question_name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if question %}
+  <h2>Question Detail:</h2>
+  <p>Question Name: {{ question.question_name }}</p>
+  <p>Question Text: {{ question.question_text }}</p>
+  <!-- Display other question fields as needed -->
+{% endif %}
+
+{% if creating %}
+  <h2>Create Question:</h2>
+  <form method="POST" action="{% url 'question_create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+  </form>
+{% endif %}
+
+{% if updating %}
+  <h2>Update Question:</h2>
+  <form method="POST" action="{% url 'question_update' question_id=question.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endif %}

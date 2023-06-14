@@ -1,0 +1,67 @@
+{% if categories %}
+  <h2>Categories:</h2>
+  <ul>
+    {% for category in categories %}
+      <li><a href="{% url 'category_detail' category_id=category.id %}">{{ category.category_name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if category %}
+  <h2>Category Detail:</h2>
+  <p>Category Name: {{ category.category_name }}</p>
+  <p>Category Description: {{ category.category_description }}</p>
+  <!-- Display other category fields as needed -->
+{% endif %}
+
+{% if creating %}
+  <h2>Create Category:</h2>
+  <form method="POST" action="{% url 'category_create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+  </form>
+{% endif %}
+
+{% if updating %}
+  <h2>Update Category:</h2>
+  <form method="POST" action="{% url 'category_update' category_id=category.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endif %}
+
+{% if exams %}
+  <h2>Exams:</h2>
+  <ul>
+    {% for exam in exams %}
+      <li><a href="{% url 'exam_detail' exam_id=exam.id %}">{{ exam.exam_name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if exam %}
+  <h2>Exam Detail:</h2>
+  <p>Exam Name: {{ exam.exam_name }}</p>
+  <p>Exam Description: {{ exam.exam_description }}</p>
+  <!-- Display other exam fields as needed -->
+{% endif %}
+
+{% if creating %}
+  <h2>Create Exam:</h2>
+  <form method="POST" action="{% url 'exam_create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create</button>
+  </form>
+{% endif %}
+
+{% if updating %}
+  <h2>Update Exam:</h2>
+  <form method="POST" action="{% url 'exam_update' exam_id=exam.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form>
+{% endif %}
