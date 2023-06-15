@@ -17,7 +17,7 @@ from . import views
 #     path('question/<int:question_id>/', views.question_detail, name='question_detail'),
 #     path('question/<int:question_id>/update/', views.question_update, name='question_update'),
 #     path('question/<int:question_id>/delete/', views.question_delete, name='question_delete'),
-# ]
+#  ]
 
 urlpatterns = [
     # Category URLs
