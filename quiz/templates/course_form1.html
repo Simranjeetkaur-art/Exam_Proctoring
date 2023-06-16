@@ -1,6 +1,6 @@
 {% if courses %}
   {% for course in courses %}
-    {% if course %}
+    {% if course_detail %}
       <div class="course">
         <h2>{{ course.course_name }}</h2>
         <p>{{ course.course_description }}</p>
@@ -24,13 +24,12 @@
   {% endfor %}
 {% endif %}
 
-{% if creating %}
-  <h2>Create Course</h2>
-{% else %}
-  <h2>Update Course</h2>
-{% endif %}
-
-{% if form %}
+{% if course_form %}
+  {% if creating %}
+    <h2>Create Course</h2>
+  {% else %}
+    <h2>Update Course</h2>
+  {% endif %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
@@ -38,7 +37,7 @@
   </form>
 {% endif %}
 
-{% if course %}
+{% if course_confirm_delete %}
   <h2>Confirm Delete</h2>
   <div class="course">
     <h3>{{ course.course_name }}</h3>
