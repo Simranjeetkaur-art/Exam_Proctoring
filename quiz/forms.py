@@ -26,17 +26,18 @@ class QuestionForm(forms.ModelForm):
 class ExamAttemptForm(forms.ModelForm):
     class Meta:
         model = ExamAttempt
-        fields = ['exam', 'student_name', 'attempt_date', 'score']
-        widgets = {
-            'attempt_date': forms.DateTimeInput(attrs={'class': 'datetime-input'}),
-        }
+        exclude = ('attempt_date',)
 
 class ExamSubmissionForm(forms.ModelForm):
     class Meta:
         model = ExamSubmission
-        fields = ['exam_attempt', 'question', 'selected_answer']
+        fields = '__all__'
 
 class StudentAnswerForm(forms.ModelForm):
     class Meta:
         model = StudentAnswer
-        fields = ['submission', 'question', 'selected_answer']
+        fields = '__all__'
+
+
+
+

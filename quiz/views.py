@@ -171,7 +171,7 @@ def exam_attempt_create(request):
             return redirect('exam_attempt_list')
     else:
         form = ExamAttemptForm()
-    return render(request, 'exam_attempt_form.html', {'form': form, 'creating': True})
+    return render(request, 'exam_attempt.html', {'form': form, 'creating': True})
 
 def exam_attempt_update(request, attempt_id):
     attempt = get_object_or_404(ExamAttempt, id=attempt_id)
@@ -182,7 +182,15 @@ def exam_attempt_update(request, attempt_id):
             return redirect('exam_attempt_detail', attempt_id=attempt_id)
     else:
         form = ExamAttemptForm(instance=attempt)
-    return render(request, 'exam_attempt_form.html', {'form': form, 'attempt': attempt, 'updating': True})
+    return render(request, 'exam_attempt.html', {'form': form, 'attempt': attempt, 'updating': True})
+
+
+
+def exam_attempt_list(request):
+    exam_attempts = ExamAttempt.objects.all()
+    return render(request, 'exam_attempt_list.html', {'exam_attempts': exam_attempts})
+
+
 
 def exam_attempt_delete(request, attempt_id):
     attempt = get_object_or_404(ExamAttempt, id=attempt_id)
@@ -226,6 +234,9 @@ def exam_submission_delete(request, submission_id):
         return redirect('exam_submission_list')
     return render(request, 'exam_submission_form.html', {'submission': submission})
 
+def exam_submission_list(request):
+    exam_submissions = ExamSubmission.objects.all()
+    return render(request, 'exam_submission_list.html', {'exam_submissions': exam_submissions})
 
 # StudentAnswer Views
 
@@ -260,3 +271,8 @@ def student_answer_delete(request, answer_id):
         answer.delete()
         return redirect('student_answer_list')
     return render(request, 'student_answer_form.html', {'answer': answer})
+
+
+def student_answer_list(request):
+    student_answers = StudentAnswer.objects.all()
+    return render(request, 'student_answer_list.html', {'student_answers': student_answers})
