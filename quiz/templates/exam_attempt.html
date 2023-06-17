@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Attempt</title>
+</head>
+<body>
+    <h1>Exam Attempt</h1>
+    
+    <form method="POST" action="{% url 'exam_attempt_create' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

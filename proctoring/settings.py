@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # Insalled external apps  
     # 'sys_check',
     'quiz',
-    # 'dummy_users',
+    'users',
 
 ]
 

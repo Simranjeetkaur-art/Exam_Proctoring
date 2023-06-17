@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Category, Course, Exam, Question
+from .models import Category, Course, Exam, Question,ExamAttempt, ExamSubmission, StudentAnswer
 from .forms import CategoryForm, CourseForm, ExamForm, QuestionForm
+from .forms import CategoryForm, CourseForm, ExamForm, QuestionForm, ExamAttemptForm, ExamSubmissionForm, StudentAnswerForm
+
 
 # Category Views
 
@@ -154,3 +156,107 @@ def course_delete(request, course_id):
         course.delete()
         return redirect('course_list')
     return render(request, 'course_form.html',{'course':course})
+
+# ExamAttempt Views
+
+def exam_attempt_detail(request, attempt_id):
+    attempt = get_object_or_404(ExamAttempt, id=attempt_id)
+    return render(request, 'exam_attempt_form.html', {'attempt': attempt})
+
+def exam_attempt_create(request):
+    if request.method == 'POST':
+        form = ExamAttemptForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('exam_attempt_list')
+    else:
+        form = ExamAttemptForm()
+    return render(request, 'exam_attempt_form.html', {'form': form, 'creating': True})
+
+def exam_attempt_update(request, attempt_id):
+    attempt = get_object_or_404(ExamAttempt, id=attempt_id)
+    if request.method == 'POST':
+        form = ExamAttemptForm(request.POST, instance=attempt)
+        if form.is_valid():
+            form.save()
+            return redirect('exam_attempt_detail', attempt_id=attempt_id)
+    else:
+        form = ExamAttemptForm(instance=attempt)
+    return render(request, 'exam_attempt_form.html', {'form': form, 'attempt': attempt, 'updating': True})
+
+def exam_attempt_delete(request, attempt_id):
+    attempt = get_object_or_404(ExamAttempt, id=attempt_id)
+    if request.method == 'POST':
+        attempt.delete()
+        return redirect('exam_attempt_list')
+    return render(request, 'exam_attempt_form.html', {'attempt': attempt})
+
+
+# ExamSubmission Views
+
+def exam_submission_detail(request, submission_id):
+    submission = get_object_or_404(ExamSubmission, id=submission_id)
+    return render(request, 'exam_submission_form.html', {'submission': submission})
+
+def exam_submission_create(request):
+    if request.method == 'POST':
+        form = ExamSubmissionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('exam_submission_list')
+    else:
+        form = ExamSubmissionForm()
+    return render(request, 'exam_submission_form.html', {'form': form, 'creating': True})
+
+def exam_submission_update(request, submission_id):
+    submission = get_object_or_404(ExamSubmission, id=submission_id)
+    if request.method == 'POST':
+        form = ExamSubmissionForm(request.POST, instance=submission)
+        if form.is_valid():
+            form.save()
+            return redirect('exam_submission_detail', submission_id=submission_id)
+    else:
+        form = ExamSubmissionForm(instance=submission)
+    return render(request, 'exam_submission_form.html', {'form': form, 'submission': submission, 'updating': True})
+
+def exam_submission_delete(request, submission_id):
+    submission = get_object_or_404(ExamSubmission, id=submission_id)
+    if request.method == 'POST':
+        submission.delete()
+        return redirect('exam_submission_list')
+    return render(request, 'exam_submission_form.html', {'submission': submission})
+
+
+# StudentAnswer Views
+
+def student_answer_detail(request, answer_id):
+    answer = get_object_or_404(StudentAnswer, id=answer_id)
+    return render(request, 'student_answer_form.html', {'answer': answer})
+
+def student_answer_create(request):
+    if request.method == 'POST':
+        form = StudentAnswerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student_answer_list')
+    else:
+        form = StudentAnswerForm()
+    return render(request, 'student_answer_form.html', {'form': form, 'creating': True})
+
+def student_answer_update(request, answer_id):
+    answer = get_object_or_404(StudentAnswer, id=answer_id)
+    if request.method == 'POST':
+        form = StudentAnswerForm(request.POST, instance=answer)
+        if form.is_valid():
+            form.save()
+            return redirect('student_answer_detail', answer_id=answer_id)
+    else:
+        form = StudentAnswerForm(instance=answer)
+    return render(request, 'student_answer_form.html', {'form': form, 'answer': answer, 'updating': True})
+
+def student_answer_delete(request, answer_id):
+    answer = get_object_or_404(StudentAnswer, id=answer_id)
+    if request.method == 'POST':
+        answer.delete()
+        return redirect('student_answer_list')
+    return render(request, 'student_answer_form.html', {'answer': answer})

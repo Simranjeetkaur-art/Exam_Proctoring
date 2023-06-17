@@ -47,4 +47,26 @@ urlpatterns = [
     path('questions/<int:question_id>/', views.question_detail, name='question_detail'),
     path('questions/<int:question_id>/update/', views.question_update, name='question_update'),
     path('questions/<int:question_id>/delete/', views.question_delete, name='question_delete'),
+
+# ================================= #
+    # ExamAttempt URLs
+    path('exam_attempts/', views.exam_attempt_list, name='exam_attempt_list'),
+    path('exam_attempts/<int:attempt_id>/', views.exam_attempt_detail, name='exam_attempt_detail'),
+    path('exam_attempts/create/', views.exam_attempt_create, name='exam_attempt_create'),
+    path('exam_attempts/<int:attempt_id>/update/', views.exam_attempt_update, name='exam_attempt_update'),
+    path('exam_attempts/<int:attempt_id>/delete/', views.exam_attempt_delete, name='exam_attempt_delete'),
+
+    # ExamSubmission URLs
+    path('exam_submissions/', views.exam_submission_list, name='exam_submission_list'),
+    path('exam_submissions/<int:submission_id>/', views.exam_submission_detail, name='exam_submission_detail'),
+    path('exam_submissions/create/', views.exam_submission_create, name='exam_submission_create'),
+    path('exam_submissions/<int:submission_id>/update/', views.exam_submission_update, name='exam_submission_update'),
+    path('exam_submissions/<int:submission_id>/delete/', views.exam_submission_delete, name='exam_submission_delete'),
+
+    # StudentAnswer URLs
+    path('student_answers/', views.student_answer_list, name='student_answer_list'),
+    path('student_answers/<int:answer_id>/', views.student_answer_detail, name='student_answer_detail'),
+    path('student_answers/create/', views.student_answer_create, name='student_answer_create'),
+    path('student_answers/<int:answer_id>/update/', views.student_answer_update, name='student_answer_update'),
+    path('student_answers/<int:answer_id>/delete/', views.student_answer_delete, name='student_answer_delete'),
 ]
